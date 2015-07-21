@@ -1,0 +1,38 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.testvideocollect.MainActivity" >
+
+    <SurfaceView
+        android:id="@+id/sf"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/startCollecting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="startCollecting" />
+
+        <Button
+            android:id="@+id/stopCollecting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="stopCollecting" />
+    </LinearLayout>
+
+    <com.example.testvideocollect.CameraPreview
+        android:id="@+id/cp"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+
+</RelativeLayout>
