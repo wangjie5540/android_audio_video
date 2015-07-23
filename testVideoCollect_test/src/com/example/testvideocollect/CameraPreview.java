@@ -43,6 +43,9 @@ public class CameraPreview extends TextureView implements TextureView.SurfaceTex
 	public void onSurfaceTextureAvailable(SurfaceTexture surface, int width,
 			int height) {
 		Log.d(TAG, "onSurfaceTextureAvailable");
+		if (mCameraRecorder != null){
+			mCameraRecorder.setSurfaceTexture(getSurfaceTexture());
+		}
 		startPreview();
 	}
 
