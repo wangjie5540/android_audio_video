@@ -35,6 +35,7 @@ public class CameraRecorder {
 	private void init() {
 		if (mCamera == null)
 			mCamera = Camera.open();
+		mCamera.setDisplayOrientation(90);
 		try {
 			mCamera.setPreviewTexture(mSurfaceTexture);
 		} catch (IOException e) {

@@ -1,4 +1,4 @@
-package bf.cloud.rlive.datasource;
+package com.example.testvideocollect;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
