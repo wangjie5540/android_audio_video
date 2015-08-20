@@ -22,6 +22,7 @@ public class AudioRecorder {
 	private OnCollectingAudioDataCallback mCallback = null;
 	private AudioRecord mAudioRecord = null;
 	private int bufferSizeInBytes;
+	public short[] buffer;
 
 	/**
 	 * 构造函数，参数同 android.media.AudioRecord
@@ -38,10 +39,10 @@ public class AudioRecorder {
 		mSampleRateInHz = SAMPLE_RATE;
 		mChannelConfig = CHANNEL_CONFIG;
 		mAudioFormat = AUDIO_FORMAT;
-
 		// 获取最小缓冲区大小
 		bufferSizeInBytes = AudioRecord.getMinBufferSize(mSampleRateInHz,
 				mChannelConfig, mAudioFormat);
+		Log.d(TAG, "getMinBufferSize = " + bufferSizeInBytes);
 		mAudioRecord = new AudioRecord(mAudioSource, // 音频源
 				mSampleRateInHz, // 采样率
 				mChannelConfig, // 音频通道
@@ -86,7 +87,7 @@ public class AudioRecorder {
 
 	class RecorderTask implements Runnable {
 		int bufferReadResult = 0;
-		public int samples_per_frame = 2048;
+		public int samples_per_frame = 4096;
 
 		@Override
 		public void run() {
@@ -101,17 +102,21 @@ public class AudioRecorder {
 			is_recording = true;
 
 			while (is_recording) {
-				byte[] buffer = new byte[samples_per_frame];
+				buffer = new short[samples_per_frame];
 				// 从缓冲区中读取数据，存入到buffer字节数组数组中
 				bufferReadResult = mAudioRecord.read(buffer, 0,
 						samples_per_frame);
+				Log.d(TAG, "" + bufferReadResult + "/" + samples_per_frame);
 				// 判断是否读取成功
 				if (bufferReadResult == AudioRecord.ERROR_BAD_VALUE
 						|| bufferReadResult == AudioRecord.ERROR_INVALID_OPERATION)
 					Log.e(TAG, "Read error");
-				if (mAudioRecord != null) {
-					if (mCallback != null) {
-						mCallback.onData(buffer, System.nanoTime());
+				else{
+					FileOperator1.append(buffer, bufferReadResult);
+					if (mAudioRecord != null) {
+						if (mCallback != null) {
+//							mCallback.onData(buffer, System.nanoTime());
+						}
 					}
 				}
 			}

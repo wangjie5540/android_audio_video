@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 			
 			@Override
 			public void onData(byte[] data, long timeStamp) {
-				Log.d(TAG, "onData " + timeStamp);
+//				Log.d(TAG, "onData " + timeStamp);
 			}
 		});
         Button start = (Button)findViewById(R.id.start_bt) ;
