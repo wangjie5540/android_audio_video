@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+
 import android.app.Activity;
 import android.graphics.PixelFormat;
 import android.media.AudioFormat;
@@ -40,6 +42,7 @@ public class TestAudioRecord extends Activity {
 	private Button Stop;
 	private AudioRecord audioRecord;
 	private boolean isRecord = false;// 设置正在录制的状态
+	private ByteBuffer audioBuffer = null;
 	//AudioName裸音频数据文件
 	private static final String AudioName = "/sdcard/love.raw";
 	//NewAudioName可播放的音频文件
@@ -124,8 +127,9 @@ public class TestAudioRecord extends Activity {
 	 * 猫在这里就进行音频的处理，然后重新封装 所以说这样得到的音频比较容易做一些音频的处理。
 	 */
 	private void writeDateTOFile() {
+		int sampleSize = 4096;
 		// new一个byte数组用来存一些字节数据，大小为缓冲区大小
-		byte[] audiodata = new byte[bufferSizeInBytes];
+		byte[] audiodata = new byte[sampleSize];
 		FileOutputStream fos = null;
 		int readsize = 0;
 		try {
@@ -138,7 +142,7 @@ public class TestAudioRecord extends Activity {
 			e.printStackTrace();
 		}
 		while (isRecord == true) {
-			readsize = audioRecord.read(audiodata, 0, bufferSizeInBytes);
+			readsize = audioRecord.read(audiodata, 0, sampleSize);
 			if (AudioRecord.ERROR_INVALID_OPERATION != readsize) {
 				try {
 					fos.write(audiodata);

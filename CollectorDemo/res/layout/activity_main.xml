@@ -1,0 +1,26 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#ffffff"
+    tools:context="bf.cloud.collectordemo.MainActivity" >
+	
+    <Button 
+        android:id="@+id/bt_with_preview"
+        android:layout_margin="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="支持预览"
+        />
+    
+    <Button 
+        android:id="@+id/bt_without_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="仅采集"
+        />
+    
+
+</LinearLayout>
